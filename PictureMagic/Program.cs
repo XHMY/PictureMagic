@@ -23,10 +23,13 @@ namespace Graphics
         {
             string[] filePicName = Directory.GetFiles("Pic");
             Rectangle cutArea = new Rectangle(x,y,width,height);
+            int count = 0;
             foreach (string PicName in filePicName)
             {
                 Bitmap tempPic = new Bitmap(PicName);
-
+                tempPic = tempPic.Clone(cutArea, tempPic.PixelFormat);
+                tempPic.Save("Pic\\WorkPic\\"+count+PicName.Substring(PicName.Length-4));
+                count++;
             }
         }
         static Dictionary<string,int> GetInput()
