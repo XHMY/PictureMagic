@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing.Imaging;
-using System.Drawing;
 using System.IO;
+using System.Drawing;
+using System.Drawing.Printing;
 
 namespace Graphics
 {
@@ -14,7 +15,7 @@ namespace Graphics
         
         static Bitmap ReadyMainPic()
         {
-            string[] filePicName = Directory.GetFiles("Pic");
+            string[] filePicName = Directory.GetFiles("Pic\\WorkPic");
             Bitmap tempPic = new Bitmap(filePicName[0]);
             Bitmap mainPic = new Bitmap(tempPic.Width,tempPic.Height*filePicName.Length);
             return mainPic;
@@ -47,9 +48,26 @@ namespace Graphics
         }
         static void Main(string[] args)
         {
+            string[] D_Picture = Directory.GetFiles("Pic\\WorkPic");
+            foreach (string file in D_Picture)
+            {
+                File.Delete(file);
+            }
             Dictionary<string,int> Area =  GetInput();
             CutPic(Area["x"], Area["y"], Area["width"], Area["height"]);
             Bitmap mainPic = ReadyMainPic();
+            string[] filePicName = Directory.GetFiles("Pic\\WorkPic");
+            Bitmap[] Pic = new Bitmap[filePicName.Length];
+            for (int i = 0; i < filePicName.Length; i++)
+            {
+                Pic[i] =new Bitmap(filePicName[i]);
+            }
+            
+
+            foreach (Bitmap pic in Pic)
+            {
+                
+            }
         }
         
     }
